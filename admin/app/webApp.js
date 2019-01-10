@@ -18,12 +18,26 @@ app.controller('LocationController', function ($scope, $http) {
             url: 'admin/api/master/LocationMaster/getMainLocations.php'
         }).then(function successCallback(response) {
             $scope.DropdownMainLocations = response.data;
+            $scope.SetLocation(0);
         });
     };
-    $scope.GetMainLocations();
     $scope.LocationChange = function(id){
         $scope.$emit("LoadProduct",id);
     };
+    $scope.SetLocation = function (id) {
+        $http.post(
+                "admin/api/WebComponents/setLocation.php",
+                {'LocationId': id}
+        ).then(function successCallback(response) {
+            for(var i = 0;i < $scope.DropdownMainLocations.length;i++){
+                if($scope.DropdownMainLocations[i].LocationId === response.data){
+                    $scope.LocationId = $scope.DropdownMainLocations[i].LocationId;
+                    break;
+                }
+            }
+        });
+    };
+    $scope.GetMainLocations();
 });
 app.controller('HeaderController', function ($scope, $http) {
     $scope.CheckLogin = function () {
@@ -65,9 +79,6 @@ app.controller('HomeController', function ($scope, $http, $compile, CartService)
             }
         });
     };
-    $scope.$on("LoadProduct",function(event,id){
-        $scope.SetLocation(id);
-    });
     $scope.SetLocation = function (id) {
         $http.post(
                 "admin/api/WebComponents/setLocation.php",
@@ -76,6 +87,9 @@ app.controller('HomeController', function ($scope, $http, $compile, CartService)
             $scope.LoadProduct(0);
         });
     };
+    $scope.$on("LoadProduct",function(event,id){
+        return $scope.SetLocation(id);
+    });
     $scope.SetLocation($scope.LocationId);
     $scope.MenuSearch = function (string, result) {
         var SearchFlag = false;
