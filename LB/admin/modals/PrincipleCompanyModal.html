@@ -1,0 +1,16 @@
+<div id="PrincipleCompanyModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="PrincipleCompanyController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Company</h3>
+    </div>
+    <form name="PrincipleCompanyForm" novalidate ng-submit="PrincipleCompanyFormValidate($event)">
+        <div class="modal-body">
+            <p id="PrincipleCompanyMsg"></p>
+            <div ng-include="'Controls/PrincipleCompanyControl.html'"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="PrincipleCompanyForm.$valid && PrincipleCompanySave()" value="Save"/>
+        </div>
+    </form>
+</div>

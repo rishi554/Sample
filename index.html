@@ -1,0 +1,150 @@
+<html ng-app="webApp" ng-controller="HomeController" data-ng-init="init()">
+    <head>
+        <title>Urban Tadaka E-Commerce Online Ordering| Home :: ALMAA Computers</title>
+        <!-- for-mobile-apps -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" />
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script src="admin/js/angular.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <header ng-include="'header.html'"></header>
+    <!-- banner -->
+    <div class="banner">
+        <div class="w3l_banner_nav_right">
+            <section class="slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <div class="w3l_banner_nav_right_banner">
+                                <h3>Chocolate <span>Strawberry</span> Cake.</h3>
+                                <div class="more">
+                                    <a href="#/products" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="w3l_banner_nav_right_banner1">
+                                <h3>Pineapple <span>Cake</span> with <i>50%</i> off.</h3>
+                                <div class="more">
+                                    <a href="#/products" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="w3l_banner_nav_right_banner2">
+                                <h3>Strawberry <i>Cheese</i> Cake.</h3>
+                                <div class="more">
+                                    <a href="#/products" class="button--saqui button--round-l button--text-thick" data-text="Shop now">Shop now</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- //flexSlider -->
+        </div>
+        <div class="clearfix"></div>
+    </div><br><br>
+    <!--<div class="newsletter">
+        <div class="container">
+            <div class="w3agile_newsletter_left">
+                <h3>Select Your Location</h3>
+            </div>
+            <div class="w3agile_newsletter_right">
+                <form >
+                    <input type="hidden" name="LocationId" ng-model="LocationId" />
+                    <input type="text" id="LocationName" ng-model="LocationtName" ng-keyup="MainLocationSearch(LocationtName)" name="MenuFormData.LocationName" value="Enter Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Location'; }" autocomplete="off">
+                    <input type="submit" ng-click="SetLocation()" value="Select">
+                    <ul class="list-group" ng-model="MainLocationDropdown" ng-hide="MainLocationDropdown">
+                        <li class="list-group-item" ng-repeat="MainLocation in MainLocations| filter: LocationtName as MainLocationSearchResult" ng-click="SelectMainLocation(MainLocation)"><a href="#"> {{ MainLocation.LocationName}}</a></li>
+                    </ul><br>
+                    <p id="MainLocationMsg"></p>
+                </form>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>-->
+    
+    <div class="banner_bottom">
+        <div class="wthree_banner_bottom_left_grid_sub">
+            <nav class="navbar nav_bottom">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <ul id="Menu" class="nav navbar-nav nav_1">
+                </ul>
+            </nav>
+        </div>
+        <div class="wthree_banner_bottom_left_grid_sub1">
+            <!-- top-brands -->
+            <div class="top-brands">
+                <div class="agile_top_brands_grids">
+                    <span id="Products"></span>
+                    <div class='col-md-3 top_brand_left' ng-repeat="Product in Products">
+                        <div class='hover14 column'>
+                            <div class='agile_top_brand_left_grid'>
+                                <div class='tag'></div>
+                                <div class='agile_top_brand_left_grid1'>
+                                    <form action="single.html">
+                                        <figure>
+                                            <div class='snipcart-item block' ng-if="Product.IsMultiLayered == 0">
+                                                <div class='snipcart-thumb'>
+                                                    <a href='single.html?id={{Product.productId}}'><img title='{{Product.ProductName}}' alt='{{Product.ProductName}}' src='/admin/lib/ProductManagement/Picture2/{{Product.Picture2}}' class="img-responsive" style="height: 200px;width: 210px"/></a>		
+                                                    <p>{{Product.ProductName}}</p>
+                                                    <h4>{{Product.Rate}} <span>{{Product.MRP}}</span></h4>
+                                                </div>
+                                                <div class='snipcart-details top_brand_home_details'>
+                                                    <input type="hidden" name="id" value="{{Product.productId}}" />
+                                                    <input type='submit' value='Shop Now' class='button' />
+                                                </div>
+                                            </div>
+                                            <div class='snipcart-item block' ng-if="Product.IsMultiLayered == 1">
+                                                <div class='snipcart-thumb'>
+                                                    <a href='Customized.html?id={{Product.productId}}'><img title='{{Product.ProductName}}' alt='{{Product.ProductName}}' src='/admin/lib/ProductManagement/Picture2/{{Product.Picture2}}' class="img-responsive" style="height: 200px;width: 210px"/></a>		
+                                                    <p>{{Product.ProductName}}</p>
+                                                    <h4>{{Product.Rate}} <span>{{Product.MRP}}</span></h4>
+                                                </div>
+                                                <div class='snipcart-details top_brand_home_details'>
+                                                    <input type="hidden" name="id" value="{{Product.productId}}" />
+                                                    <input type='submit' value='Shop Now' class='button' />
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><br><div class="clearfix"> </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <!-- //top-brands -->
+            <div class="clearfix"> </div>
+            <ul class="pagination pagination-sm pull-right" style="padding-right: 15px;padding-left: 15px;">
+                <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <script src="admin/app/webApp.js"></script>
+    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+                                                        $(window).load(function () {
+                                                        $('.flexslider').flexslider({
+                                                        animation: "slide",
+                                                                start: function (slider) {
+                                                                $('body').removeClass('loading');
+                                                                }
+                                                        });
+                                                        });
+    </script>
+    
+    <header ng-include="'footer.html'"></header>

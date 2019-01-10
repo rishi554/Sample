@@ -1,0 +1,14 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Data Type:</b></label>
+        <select name="ListId" ng-model="MatrixListFormData.ListId" class="span4" id="ListId">
+            <option value=''>--Select List--</option>
+            <option ng-repeat="List in Lists" value="{{List.ListTypeId}}">{{List.ListTypeName}}</option>
+        </select>
+        <br>
+        <a href="#ListModal" role="button" data-toggle="modal">Add List</a>
+        <label class="control-label"><b>Data:</b></label>
+        <input type="text" class="span4" name="MatrixListName" ng-model="MatrixListFormData.MatrixListName" required />
+        <span style="color:red" ng-show="MatrixListNameRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

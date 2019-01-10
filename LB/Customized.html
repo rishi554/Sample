@@ -1,0 +1,139 @@
+<html ng-app="webApp" ng-controller="CustomizedProductDetailsController">
+    <head>
+        <title>Urban Tadaka E-Commerce Online Ordering | Product Details :: ALMAA Computers</title>
+        <!-- for-mobile-apps -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" />
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script src="admin/js/angular.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <header ng-include="'header.html'"></header>
+    <!-- products-breadcrumb -->
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a><span>|</span></li>
+                <li>Product Details</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //products-breadcrumb -->
+    <!-- banner -->
+    <div class="banner">
+        <div class="w3l_banner_nav_right">
+            <div class="w3l_banner_nav_right_banner3">
+                <h3>Best Deals For New Products<span class="blink_me"></span></h3>
+            </div>
+            <div class="agileinfo_single" id='msg'>
+                <h5 class="well">{{Item.ProductName}}</h5>
+                <div class="col-md-4">
+                    <div class="well">
+                        <img id="example" src="/admin/lib/ProductManagement/Picture1/{{Item.Picture1}}" alt=" " class="img-responsive" />
+                        <h4>Description :</h4><br>
+                        <p>{{Item.ProductMsg}}</p>
+                    </div>
+                    <div class="w3agile_description well" ng-repeat="Question in Item.Questions" ng-show="ShowTypes">
+                        <h4>{{Question.ForcedQueName}}:</h4><br>
+                        <div class="form-check">
+                            <div ng-repeat="ChildQue in Question.ChildQuestions">
+                                <input type="radio" ng-click="TypeSelected(ChildQue)" class="form-check-input" name="Types">
+                                <label class="label label-success">{{ChildQue.ProductName}}</label>
+                                <label class="label label-success">Price: {{ChildQue.Rate}}</label><br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form id="LayerForm">
+                    <div class="col-md-4 agileinfo_single_right">
+                        <div class="CustomizedCake" ng-repeat="i in getLayerCount(Item.LayerCount)" ng-init="OFRate[$index]=0;IFRate[$index]=0">
+                            <h4>Layer: {{$index + 1}}</h4><br>
+                            <div class="LoopingControl well"> 
+                                <div class="w3agile_description agileinfo_mail_grid_right">
+                                    <h4>Inside Flavor</h4>
+                                    <select type="text" ng-change="InsideFlavorSelected(Item.InsideChildFlavor,$index)" ng-options="InsideChildFlavor as InsideChildFlavor.ProductName for InsideChildFlavor in Item.Flavors.ChildFlavors" ng-model="Item.InsideChildFlavor[$index]" name="Item.InsideChildFlavor[]">
+                                        <option value="">-- Select Flavor --</option>
+                                    </select>                       
+                                </div>
+                                <div class="w3agile_description agileinfo_mail_grid_right">
+                                    <h4>Outside Flavor</h4>
+                                    <select type="text" ng-change="OutFlavorSelected(Item.OutsideChildFlavor,$index)" ng-options="OutsideChildFlavor as OutsideChildFlavor.ProductName for OutsideChildFlavor in Item.Flavors.ChildFlavors" ng-model="Item.OutsideChildFlavor[$index]" name="Item.OutsideChildFlavor[]">
+                                        <option value="">-- Select Flavor --</option>
+                                    </select>                       
+                                </div>
+                                <div class="w3agile_description agileinfo_mail_grid_right">
+                                    <h4>Text</h4>
+                                    <input type="text" ng-model="Item.ChildFlavorText[$index]" name="Item.ChildFlavorText[]" />                       
+                                </div>
+                                <div class="w3agile_description agileinfo_mail_grid_right">
+                                    <h4>Color</h4>
+                                    <input type="text" ng-model="Item.ChildFlavorColor[$index]" name="Item.ChildFlavorColor[]" />                       
+                                </div>
+                                <div class="w3agile_description agileinfo_mail_grid_right">
+                                    <h4>Font</h4>
+                                    <input type="text" ng-model="Item.ChildFlavorFont[$index]" name="Item.ChildFlavorFont[]" />                       
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w3agile_description agileinfo_mail_grid_right">
+                            <h4>Upload Image: </h4><br>
+                            <input type="file" ng-model="Item.ExampleImage" name="Item.ExampleImage" />                       
+                        </div><br>
+                        <div class="w3agile_description agileinfo_mail_grid_right">
+                            <h4>Message: </h4><br>
+                            <textarea type="file" style="min-height: 100px;margin: 0;" ng-model="Item.UserMessage" name="Item.UserMessage">  </textarea>                     
+                        </div><br>
+                        <div class="snipcart-item block">
+                            <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                                <h4><span>MRP: {{Item.MRP}}</span><br>
+                                    Discount: {{Item.ProductDIscount}} <br>Total: {{Item.Rate - Item.ProductDIscount}}</h4>
+                            </div>
+                        </div>
+                        <div class='snipcart-details'>
+                            <input type="hidden" name="Item.chid" ng-model="Item.chid"/>
+                            <input type="hidden" name="Quantity" ng-model="Item.Quantity"/>
+                            <input type='submit' name='submit' value='Add to Product' ng-click="validate(Item, 1)" class='button btn btn-default' /><br><br>
+                            <input type='submit' name='submit' style="background: #84C639;" ng-click="redirect()" value='Buy Now' class='button' />
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-4 agileinfo_single_right" ng-show="ShowModifiers">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Related Products</div>
+                        <div class="panel-body example-1 scrollbar scrollbar-black bordered-black square thin">
+                            <div class="agile_top_brands_grids" ng-repeat="Modifier in Modifiers">
+                                <div class='top_brand_left'>
+                                    <div class='agile_top_brand_left_grid'>
+                                        <div class='tag'></div>
+                                        <div class='agile_top_brand_left_grid1'>
+                                            <figure>
+                                                <div class='snipcart-item block' >
+                                                    <div class='snipcart-thumb'>
+                                                        <img title='{{Modifier.ProductName}}' alt='{{Modifier.ProductName}}' src='/admin/lib/ProductManagement/Picture2/{{Modifier.Picture2}}' class="img-responsive" />		
+                                                        <p>{{Modifier.ProductName}}</p>
+                                                        <h4>{{Modifier.Rate}}</h4>
+                                                    </div>
+                                                    <div class='snipcart-details top_brand_home_details'>
+                                                        <input type='submit' name='submit' ng-click="validate(Modifier, 0)" value='Add' class='button' />
+                                                    </div>
+                                                </div>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <hr>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- //banner -->
+    <!-- //brands -->
+    <script src="admin/app/webApp.js"></script>
+    <header ng-include="'footer.html'"></header>

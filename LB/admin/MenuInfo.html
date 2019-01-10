@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Menu Management - ALMAA Computers.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" >
+        <script src="js/jquery-1.7.2.min.js"></script> 
+        <script src="js/angular.min.js"></script>
+        <style>
+            .table-responsive-sm{
+                margin-left: 180px;
+            }
+        </style>
+        <!--- Header file is here -->
+    <body ng-app="app" ng-controller="MenuController" data-ng-init="init()" >
+        <header ng-include="'header.html'"></header>
+        <div class="main">
+            <div class="main-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">      		
+                            <div class="widget ">
+                                <div class="widget-header">
+                                    <i class="icon-align-justify"></i>
+                                    <h3>Menu Information</h3>
+                                </div> <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <br>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="jscontrols">
+
+                                            <form id="MenuForm" name="MenuForm" class="form-horizontal" ng-submit="MenuFormValidate($event)">
+                                                <fieldset>
+                                                    <p id="MenuMsg"></p>
+                                                    <div class="span5">
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Menu Details</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="MenuName">Menu Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="MenuName" ng-model="MenuFormData.MenuName">
+                                                                <span style="color:red" ng-show="MenuNameRequired">* Required</span>	
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="PCompanyId">Grouping On</label>
+                                                            <div class="controls">
+                                                                <select name="PCompanyId" ng-model="MenuFormData.GroupingOnId" class="span3" id="GroupingOnId">
+                                                                    <option value=''>--Select Grouping--</option>
+                                                                    <option ng-repeat="Group in Groups" value="{{Group.GroupingId}}">{{Group.GroupingName}}</option>
+                                                                </select>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Teams">Teams</label>
+                                                            <div class="controls">
+                                                                <select ng-options="Team.id as Team.TeamName for Team in Teams" class="span3" id="WeekDays" ng-model="MenuFormData.MenuTeamId" multiple="multiple"></select>
+                                                                <br>
+                                                                <a href="#TeamModal" role="button" data-toggle="modal">Add Team</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Location">Location</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" name="MenuFormData.LocationId" ng-model="MenuFormData.LocationId" />
+                                                                <input type="text" class="span3" id="LocationName" ng-model="MenuFormData.LocationtName"ng-keyup="MainLocationSearch(MenuFormData.LocationtName)" name="MenuFormData.LocationName" autocomplete="off">
+                                                                <ul class="list-group" ng-model="MainLocationDropdown" ng-hide="MainLocationDropdown">
+                                                                    <li class="list-group-item" ng-repeat="MainLocation in MainLocations| filter: MenuFormData.LocationtName as MainLocationSearchResult" ng-click="SelectMainLocation(MainLocation)"><a href="#"> {{ MainLocation.LocationName}}</a></li>
+                                                                </ul>
+                                                                <p id="MainLocationMsg"></p>
+                                                            </div> <!-- /controls -->					
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="MenuName">Enter Product Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="ProductName" ng-model="MenuFormData.ProductName" name="ProductName" ng-keyup="MenuProductSearch(MenuFormData.ProductName)" autocomplete="off">
+                                                                <ul class="list-group" ng-model="ProductDropdown" ng-hide="ProductDropdown">
+                                                                    <li class="list-group-item" ng-repeat="Product in Products| filter: MenuFormData.ProductName as ProductSearchResult" ng-click="AddProduct(Product)"><a href="#"> {{ Product.ProductName}}</a></li>
+                                                                </ul>
+                                                                <p id="ProductMenuMsg"></p>
+                                                                <span style="color:red" ng-show="MenuProductNameRequired">* Required</span>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                    </div><div class="clearfix"></div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Product</th>
+                                                                    <th scope="col">Sub group</th>
+                                                                    <th scope="col">Brand</th>
+                                                                    <th scope="col">Rate</th>
+                                                                    <th scope="col">Sub Menu</th>
+                                                                    <th scope="col">Questions</th>
+                                                                    <th scope="col">Modifiers</th>
+                                                                    <th scope="col">Flavors</th>
+                                                                    <th scope="col" colspan="3">Multi-Layered</th>
+                                                                    <th scope="col" colspan="4">Layer Count</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="ProductList in ProductChildList track by $index">
+                                                                    <th scope="row">{{ProductList.productId}}</th>
+                                                                    <td>{{ProductList.ProductName}}</td>
+                                                                    <td>{{ProductList.ProductSubGroupName}}</td>
+                                                                    <td>{{ProductList.BrandName}}</td>
+                                                                    <td><a href="#RateSelectorModal{{$index}}" role="button" data-toggle="modal"><span id="RateSelected{{$index}}">{{ProductList.Rate}}</span></a>
+                                                                        <input type="hidden" name="Rate[]" ng-model="Rate[$index]" />
+                                                                        <input type="hidden" name="TaxAmount[]" ng-model="TaxAmount[$index]" />
+                                                                    </td>
+                                                                    <td><a href="#SubmenuSelectorModal{{$index}}" role="button" data-toggle="modal"><span id="SubMenuIdSelected{{$index}}">{{ SubMenuIdSelected}}</span> Selected</a>
+                                                                        <input type="hidden" name="SubMenuId[]" ng-model="SubMenuId[$index]" value="{{$index}}"/>
+                                                                        <input type="hidden" name="ProductData[]" ng-model="ProductData[ProductList.productId]" ng-value="{{ProductList}}" />
+                                                                    </td>
+                                                                    <td><a href="#QuestionsSelectorModal{{$index}}" role="button" data-toggle="modal"><span id="ForcedQuestionIdSelected{{$index}}">{{ ForcedQuestionIdSelected}}</span> Selected</a>
+                                                                        <input type="hidden" name="QuestionId[]"  ng-model="QuestionId[$index]" />
+                                                                    </td>
+                                                                    <td><a href="#ModifierSelectorModal{{$index}}" role="button" data-toggle="modal"><span id="ModifierIdSelected{{$index}}">{{ ModifierIdSelected}}</span></a>
+                                                                        <input type="hidden" name="ModifierId[]" ng-model="ModifierId[$index]"/>
+                                                                    </td>
+                                                                    <td><a href="#FlavorSelectorModal{{$index}}" role="button" data-toggle="modal"><span id="FlavorsIdSelected{{$index}}">{{ FlavorsIdSelected}}</span></a>
+                                                                        <input type="hidden" name="FlavorId[]" ng-model="FlavorId[$index]"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select name="IsMultilayered[]" ng-change="ChangeLayerCount($index)" ng-model="IsMultilayered[$index]" style="width:80px;">
+                                                                            <option value='0' selected="selected">No</option>
+                                                                            <option value='1'>Yes</option>
+                                                                        </select>	
+                                                                    </td>
+                                                                    <td>
+                                                                        <div id="RateSelectorModal{{$index}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                <h3 id="myModalLabel1">Rate</h3>
+                                                                            </div>
+                                                                            <div class="modal-body">											
+                                                                                <div class="control-group">	
+                                                                                    <label class="control-label"><b>Enter Rate:</b></label>
+                                                                                    <div class="controls" style="margin-left:0">
+                                                                                        <input class="span3" id="RateId{{$index}}" ng-model="RateId[$index]" type="number" step="any" />
+                                                                                        <input class="span3" id="RateData{{$index}}" type="hidden" value="{{ProductList}}" />
+                                                                                    </div> <!-- /controls -->				
+                                                                                </div> <!-- /control-group -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                                <input type="submit" class="btn btn-primary pull-left" ng-click="RateSelectorSave($index)" value="Save"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div id="SubmenuSelectorModal{{$index}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                <h3 id="myModalLabel1">Select Sub Menu</h3>
+                                                                            </div>
+                                                                            <div class="modal-body">											
+                                                                                <div class="control-group">	
+                                                                                    <label class="control-label"><b>Sub Menus:</b></label>
+                                                                                    <div class="controls" style="margin-left:0">
+                                                                                        <select id="SubMenuId{{$index}}" multiple>
+                                                                                            <option ng-repeat="Submenu in SubMenus" value="{{Submenu.MatrixListMasterId}}">{{Submenu.DataName}}</option>
+                                                                                        </select>
+                                                                                        <br>
+                                                                                        <a href="#SubMenuModal" role="button" data-toggle="modal">Add Sub Menu</a>
+                                                                                    </div> <!-- /controls -->				
+                                                                                </div> <!-- /control-group -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                                <input type="submit" class="btn btn-primary pull-left" ng-click="SubmenuSelectorSave($index)" value="Save"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select name="LayerCount[]" ng-change="CheckMultilayeredFlag($index)" ng-model="LayerCount[$index]" style="width:80px;">
+                                                                            <option value='1'>1</option>
+                                                                            <option value='2'>2</option>
+                                                                            <option value='3'>3</option>
+                                                                            <option value='4'>4</option>
+                                                                            <option value='5'>5</option>
+                                                                            <option value='6'>6</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div id="QuestionsSelectorModal{{$index}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                <h3 id="myModalLabel2">Select Questions</h3>
+                                                                            </div>
+                                                                            <div class="modal-body">											
+                                                                                <div class="control-group">	
+                                                                                    <label class="control-label"><b>Questions:</b></label>
+                                                                                    <div class="controls" style="margin-left:0">
+                                                                                        <select id="QuestionsId{{$index}}" multiple>
+                                                                                            <option ng-repeat="Question in Questions" value="{{Question.ForcedQueId}}">{{Question.ForcedQueName}}</option>
+                                                                                        </select>
+                                                                                        <br>
+                                                                                        <a href="#ForcedQuestionChildModal" role="button" data-toggle="modal">Add Questions</a>
+                                                                                    </div> <!-- /controls -->				
+                                                                                </div> <!-- /control-group -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                                <input type="submit" class="btn btn-primary pull-left" ng-click="QuestionSelectorSave($index)" value="Save"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div id="ModifierSelectorModal{{$index}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                <h3 id="myModalLabel3">Select Modifiers</h3>
+                                                                            </div>
+                                                                            <div class="modal-body">											
+                                                                                <div class="control-group">	
+                                                                                    <label class="control-label"><b>Modifiers</b></label>
+                                                                                    <div class="controls" style="margin-left:0">
+                                                                                        <select id="ModifiersId{{$index}}">
+                                                                                            <option value="0">--Select Modifier--</option>
+                                                                                            <option ng-repeat="Modifier in Modifiers" value="{{Modifier}}">{{Modifier.ModifierName}}</option>
+                                                                                        </select>
+                                                                                        <br>
+                                                                                        <a href="#ModifierChildModal" role="button" data-toggle="modal">Add Modifiers</a>
+                                                                                    </div> <!-- /controls -->				
+                                                                                </div> <!-- /control-group -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                                <input type="submit" class="btn btn-primary pull-left" ng-click="ModifierSelectorSave($index)" value="Save"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div id="FlavorSelectorModal{{$index}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                                <h3 id="myModalLabel4">Select Flavors</h3>
+                                                                            </div>
+                                                                            <div class="modal-body">											
+                                                                                <div class="control-group">	
+                                                                                    <label class="control-label"><b>Flavors:</b></label>
+                                                                                    <div class="controls" style="margin-left:0">
+                                                                                        <select id="FlavorId{{$index}}">
+                                                                                            <option value="0">--Select Flavors--</option>
+                                                                                            <option ng-repeat="Flavor in Flavors" value="{{Flavor}}">{{Flavor.FlavorMasterName}}</option>
+                                                                                        </select>
+                                                                                        <br>
+                                                                                        <a href="#FlavorChildModal" role="button" data-toggle="modal">Add Flavors</a>
+                                                                                    </div> <!-- /controls -->				
+                                                                                </div> <!-- /control-group -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                                <input type="submit" class="btn btn-primary pull-left" ng-click="FlavorSelectorSave($index)" value="Save"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div><div class="clearfix"></div>
+                                                    {{MenuFormData.SubMenuId}}
+                                                    <div class="form-actions">
+                                                        <button type="submit" class="btn btn-primary btn-large" ng-click="MenuForm.$valid && MenuSave()">Save</button>
+                                                        <a href="#MenuListModal" data-toggle="modal" class="btn btn-warning btn-large">List</a>
+                                                        <button class="btn btn-large" ng-click="MenuFormReset()">Reset</button>
+                                                    </div> <!-- /form-actions -->
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> <!-- /widget-content -->
+                            </div> <!-- /widget -->
+                        </div> <!-- /span8 -->
+                    </div> <!-- /row -->
+                </div> <!-- /container -->
+            </div> <!-- /main-inner -->
+        </div> <!-- /main -->
+        <script src="app/menuApp.js"></script> 
+        <div ng-include="'modals/SubMenuModal.html'"></div>
+        <div ng-include="'modals/ForcedQuestionChildMasterModal.html'"></div>
+        <div ng-include="'modals/QuestionModal.html'"></div>
+        <div ng-include="'modals/ModifierChildModal.html'"></div>
+        <div ng-include="'modals/ModifierMasterModal.html'"></div>
+        <div ng-include="'modals/FlavorChildModal.html'"></div>
+        <div ng-include="'modals/FlavorMasterModal.html'"></div>
+        <div ng-include="'modals/MainLocationModal.html'"></div>
+        <div ng-include="'modals/TeamModal.html'"></div>
+        <div ng-include="'footer.html'"></div>
+

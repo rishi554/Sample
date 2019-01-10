@@ -1,0 +1,92 @@
+<div class="span3">
+    <div class="control-group">
+        <div class="controls">
+            <label class="control-label"><b>Card Type Name:</b></label>
+            <input type="text" class="span3" name="CardTypeName" ng-model="FormData.CardTypeName" required />
+            <span style="color:red" ng-show="CardTypeNameRequired">* Required</span>
+            <label class="control-label"><b>On Sale Value:</b></label>
+            <input type="text" class="span3" name="OnSaleValue" ng-model="FormData.OnSaleValue" required />
+            <span style="color:red" ng-show="OnSaleValueRequired">* Required</span>
+            <label class="control-label"><b>Points Awarded:</b></label>
+            <input type="text" class="span3" name="PointAwarded" ng-model="FormData.PointAwarded" required />
+            <span style="color:red" ng-show="PointAwardedRequired">* Required</span>
+            <label class="control-label"><b>Round Off Points:</b></label>
+            <select ng-model="FormData.RoundOffId" class="span3" id="RoundOffId">
+                <option value='0'>--Select Roundoff Type--</option>
+            </select>
+            <span style="color:red" ng-show="RoundOffIdRequired">* Required</span>
+            <label class="control-label"><b>Rounding Limit:</b></label>
+            <input type="text" class="span3" name="RoundingLimit" ng-model="FormData.RoundingLimit" required />
+            <span style="color:red" ng-show="RoundingLimitRequired">* Required</span>
+            <label class="control-label"><b>Extra Points On B'Day & A'Day:</b></label>
+            <input type="text" class="span3" name="ExtraPointsOnBirthday" ng-model="FormData.ExtraPointsOnBirthday" required />
+            <span style="color:red" ng-show="ExtraPointsOnBirthdayRequired">* Required</span>
+            <label class="control-label"><b>Award Point To Linked Customer:</b></label>
+            <input type="text" class="span3" name="PointToLinkedCustomer" ng-model="FormData.PointToLinkedCustomer" required />
+            <span style="color:red" ng-show="PointToLinkedCustomerRequired">* Required</span>
+            <label class="control-label"><b>Points To Convert:</b></label>
+            <input type="text" class="span3" name="PointToConvert" ng-model="FormData.PointToConvert" required />
+            <span style="color:red" ng-show="PointToConvertRequired">* Required</span>
+            <label class="control-label"><b>Equivalent Currency:</b></label>
+            <input type="text" class="span3" name="EquivalentCurrency" ng-model="FormData.EquivalentCurrency" required />
+            <span style="color:red" ng-show="EquivalentCurrencyRequired">* Required</span>
+            <label class="control-label"><b>MarginDays:</b></label>
+            <input type="text" class="span3" name="MarginDays" ng-model="FormData.MarginDays" required />
+            <span style="color:red" ng-show="MarginDaysRequired">* Required</span>
+            <label class="control-label"><b>Discount (%):</b></label>
+            <input type="text" class="span3" name="DiscountPer" ng-model="FormData.DiscountPer" required />
+            <span style="color:red" ng-show="DiscountPerRequired">* Required</span>
+        </div> <!-- /controls -->
+    </div>
+</div>
+<div class="span3">
+    <div class="control-group">	                    
+        <div class="controls">
+            <label class="control-label"><b>Calculate Extra Point on:</b></label>
+            <select ng-model="FormData.CalExtraPointMethod" class="span3" id="CalExtraPointMethod">
+                <option value='0'>--Select Method--</option>
+            </select>
+            <span style="color:red" ng-show="CalExtraPointMethodRequired">* Required</span>
+            <label class="control-label"><b>Multiply Points By:</b></label>
+            <input type="text" class="span3" name="MultiplyPointBy" ng-model="FormData.MultiplyPointBy" required />
+            <span style="color:red" ng-show="MultiplyPointByRequired">* Required</span>
+            <label class="control-label"><b>Applicable Week Days:</b></label>
+            <select ng-options="WeekDay.WeekDaysId as WeekDay.Day for WeekDay in Days" class="span3" id="WeekDays" ng-model="FormData.WeekDays" multiple="multiple">                         </select>
+            <span style="color:red" ng-show="WeekDaysRequired">* Required</span>
+            <label class="control-label"><b>From Time:</b></label>
+            <input type="time" class="span3" name="FromTime" ng-model="FormData.FromTime" required />
+            <span style="color:red" ng-show="FromTimeRequired">* Required</span>
+            <label class="control-label"><b>To Time:</b></label>
+            <input type="time" class="span3" name="ToTime" ng-model="FormData.ToTime" required />
+            <span style="color:red" ng-show="ToTimeRequired">* Required</span>
+            <label class="control-label"><b>Restrict Sale for Sub group:</b></label>
+            <select ng-model="FormData.RestrictedSG" class="span3" id="RestrictedSG">
+                <option value='0'>--Select Subscription--</option>
+            </select>
+            <span style="color:red" ng-show="RestrictedSGRequired">* Required</span>
+            <br>	
+            <label class="control-label"><b>Subscription:</b></label>
+            <select ng-model="FormData.SubscriptionDetail" class="span3" id="SubscriptionDetail">
+                <option value='0'>--Select Subscription--</option>
+            </select>
+            <span style="color:red" ng-show="SubscriptionDetailRequired">* Required</span>
+            <label class="control-label"><b>Allow Discount On Sub Group:</b></label>
+            <select ng-model="FormData.AllowDiscountOnSG" class="span3" id="AllowDiscountOnSG">
+                <option value='0'>--Select Subscription--</option>
+            </select>
+            <span style="color:red" ng-show="AllowDiscountOnSGRequired">* Required</span>
+            <br><div class="clearfix"></div>
+            <label class="control-label"><b>Exclude Tax In Point:</b></label>
+            <label class="radio inline">
+                <input type="radio"  name="ExcludeTaxInPoint" ng-model="FormData.ExcludeTaxInPoint" ng-value="'1'"> Yes
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="ExcludeTaxInPoint" ng-model="FormData.ExcludeTaxInPoint" ng-value="'0'"> No
+            </label>
+            <span style="color:red" ng-show="ExcludeTaxInPointRequired">* Required</span>
+            <label class="control-label"><b>Point Awarded On Product:</b></label>
+            <input type="text" class="span3" name="CardTypeName" ng-model="FormData.PointAwardedOnProduct" required />
+            <span style="color:red" ng-show="PointAwardedOnProductRequired">* Required</span>
+        </div> <!-- /controls -->
+    </div>
+</div>

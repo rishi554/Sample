@@ -1,0 +1,16 @@
+<div id="SubMenuModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="SubMenuController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Sub Menu</h3>
+    </div>
+    <form name="SubMenuForm" id="SubMenuForm" novalidate ng-submit="SubMenuFormValidate($event)">
+        <div class="modal-body">
+            <p id="SubMenuMsg"></p>
+            <div ng-include="'Controls/SubmenuControl.html'"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="SubMenuForm.$valid && SubMenuSave()" value="Save"/>
+        </div>
+    </form>
+</div>

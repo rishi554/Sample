@@ -1,0 +1,23 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Tax Name:</b></label>
+        <input type="text" class="span4" name="TaxName" ng-model="TaxFormData.TaxName" required />
+        <span style="color:red" ng-show="TaxNameRequired">* Required</span>
+        <label class="control-label"><b>Included in Rate:</b></label>
+        <label class="radio inline">
+            <input type="radio"  name="CalMethod" value="1" ng-model="TaxFormData.CalMethod"> Yes
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="CalMethod" value="0" ng-model="TaxFormData.CalMethod"> No
+        </label>
+        <label class="control-label"><b>Tax Value</b></label>
+        <input type="number" step="any" class="span4" name="TaxValue" ng-model="TaxFormData.TaxValue" required />
+        <span style="color:red" ng-show="TaxValueRequired">* Required</span>
+        <label class="control-label"><b>Discount Method:</b></label>
+        <select class="span4" id="IncludedInRate" ng-model="TaxFormData.IncludedInRate">
+            <option value=''>--Select Calculation Method--</option>
+            <option value='1'>After Tax</option>
+            <option value='0'>Before Tax</option>
+        </select>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

@@ -1,0 +1,16 @@
+<div id="FlavorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="FlavorController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Department</h3>
+    </div>
+    <form name="FlavorForm" novalidate ng-submit="FlavorFormValidate($event)">
+        <div class="modal-body">
+            <p id="FlavorMsg"></p>
+            <div ng-include="'Controls/FlavorMasterControl.html'"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="FlavorForm.$valid && FlavorSave()" value="Save"/>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,134 @@
+<!-- footer -->
+<div class="footer">
+    <div class="container">
+        <div class="col-md-3 w3_footer_grid">
+            <h3>information</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a href="/">Home</a></li>
+                <li><a href="#/about">About Us</a></li>
+                <li><a href="#/products">Best Deals</a></li>
+                <li><a href="#/services">Services</a></li>
+                <li><a href="#/mail">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 w3_footer_grid">
+            <h3>policy info</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a href="#/faqs">FAQ</a></li>
+                <li><a href="#/privacy">privacy policy</a></li>
+                <li><a href="#/privacy">terms of use</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 w3_footer_grid">
+            <h3>what in stores</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a href="#">Product Type 1</a></li>
+                <li><a href="#">Product Type 2</a></li>
+                <li><a href="#">Product Type 3</a></li>
+                <li><a href="#">Product Type 4</a></li>
+                <li><a href="#">Product Type 5</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 w3_footer_grid">
+            <h3>Latest Update</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a href="#">01 day ago</a></li>
+                <li><a href="#">02 day ago</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="agile_footer_grids">
+            <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                <div class="w3_footer_grid_bottom">
+                    <h5>connect with us</h5>
+                    <ul class="agileits_social_icons">
+                        <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="wthree_footer_copy">
+            <p>© 2018 Urban Tadaka. All rights reserved | Designed by <a href="http://techmainstay.com/" target="_blank">TechMainstay Software Private Limited.</a></p>
+        </div>
+    </div>
+</div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+        );
+    });
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear' 
+         };
+         */
+
+        $().UItoTop({easingType: 'easeOutQuart'});
+
+    });
+</script>
+<!--quantity-->
+<script>
+    $('.value-plus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
+        divUpd.text(newVal);
+    });
+
+    $('.value-minus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
+        if (newVal >= 1)
+            divUpd.text(newVal);
+    });
+</script>
+<!--quantity-->
+<script>$(document).ready(function (c) {
+        $('.close1').on('click', function (c) {
+            $('.rem1').fadeOut('slow', function (c) {
+                $('.rem1').remove();
+            });
+        });
+    });
+</script>
+<script>$(document).ready(function (c) {
+        $('.close2').on('click', function (c) {
+            $('.rem2').fadeOut('slow', function (c) {
+                $('.rem2').remove();
+            });
+        });
+    });
+</script>
+<script>$(document).ready(function (c) {
+        $('.close3').on('click', function (c) {
+            $('.rem3').fadeOut('slow', function (c) {
+                $('.rem3').remove();
+            });
+        });
+    });
+</script>
+<!-- //here ends scrolling icon -->
+
+</body>
+</html>

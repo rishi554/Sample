@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Home - Admin Fusion Company Limited.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" >
+        <script src="js/jquery-1.7.2.min.js"></script> 
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-route.js"></script>
+        <!--- Header file is here -->
+    <body ng-app="app" ng-controller="MainController" data-ng-init="init()" >
+        <header ng-include="'header.html'"></header>
+        <div class="main">
+            <div class="main-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span6">
+                            <div class="widget widget-nopad">
+                                <div class="widget-header"> <i class="icon-list-alt"></i>
+                                    <h3> Today's Stats</h3>
+                                </div>
+                                <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <div class="widget big-stats-container">
+                                        <div class="widget-content">
+                                            <div id="big_stats" class="cf">
+                                                <div class="stat"> <i class="icon-anchor"></i> <span class="value">851</span> </div>
+                                                <!-- .stat -->
+                                                <div class="stat"> <i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
+                                                <!-- .stat -->
+                                                <div class="stat"> <i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
+                                                <!-- .stat -->
+                                                <div class="stat"> <i class="icon-bullhorn"></i> <span class="value">25%</span> </div>
+                                                <!-- .stat --> 
+                                            </div>
+                                        </div>
+                                        <!-- /widget-content --> 
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /widget -->
+                            <div class="widget">
+                                <div class="widget-header"> <i class="icon-file"></i>
+                                    <h3> Content</h3>
+                                </div>
+                                <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <ul class="messages_layout">
+                                        <li class="from_user left"> <a href="#" class="avatar"><img src="img/message_avatar1.png"/></a>
+                                            <div class="message_wrap"> <span class="arrow"></span>
+                                                <div class="info"> <a class="name">Celeste Holm </a> <span class="time">1 Day ago</span>
+                                                    <div class="options_arrow">
+                                                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
+                                                            <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
+                                                                <li><a href="#"><i class=" icon-share-alt icon-large"></i> Reply</a></li>
+                                                                <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
+                                                                <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text"> And I'd do it again! And perhaps a third time! But that would be it. Are you crazy? I can't swallow that. And I'm his friend Jesus. No, I'm Santa Claus! And from now on you're all named Bender Jr. </div>
+                                            </div>
+                                        </li>
+                                        <li class="from_user left"> <a href="#" class="avatar"><img src="img/message_avatar2.png"/></a>
+                                            <div class="message_wrap"> <span class="arrow"></span>
+                                                <div class="info"> <a class="name">Mark Jobs </a> <span class="time">2 Days ago</span>
+                                                    <div class="options_arrow">
+                                                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
+                                                            <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
+                                                                <li><a href="#"><i class=" icon-share-alt icon-large"></i> Reply</a></li>
+                                                                <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
+                                                                <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text"> That's the ONLY thing about being a slave. Now, now. Perfectly symmetrical violence never solved anything. Uh, is the puppy mechanical in any way? As an interesting side note, as a head without a body, I envy the dead. </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /widget-content --> 
+                            </div>
+                            <!-- /widget --> 
+                        </div>
+                        <!-- /span6 -->
+                        <div class="span6">
+                            <div class="widget">
+                                <div class="widget-header"> <i class="icon-bookmark"></i>
+                                    <h3>Important Shortcuts</h3>
+                                </div>
+                                <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <div class="shortcuts"> <a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span
+                                                class="shortcut-label">Apps</span> </a><a href="javascript:;" class="shortcut"><i
+                                                class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-user"></i><span
+                                                class="shortcut-label">Users</span> </a><a href="javascript:;" class="shortcut"><i
+                                                class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> </a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
+                                    <!-- /shortcuts --> 
+                                </div>
+                                <!-- /widget-content --> 
+                            </div>
+                            <!-- /widget -->
+                            <div class="widget">
+                                <div class="widget-header"> <i class="icon-signal"></i>
+                                    <h3> Area Chart</h3>
+                                </div>
+                                <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <canvas id="area-chart" class="chart-holder" height="250" width="538"> </canvas>
+                                    <!-- /area-chart --> 
+                                </div>
+                                <!-- /widget-content --> 
+                            </div>
+                        </div>
+                        <!-- /span6 --> 
+                    </div>
+                    <!-- /row --> 
+                </div>
+                <!-- /container --> 
+            </div>
+            <!-- /main-inner --> 
+        </div>
+        <!-- /extra -->
+        <script src="app/mainApp.js"></script> 
+        <div ng-include="'footer.html'"></div>

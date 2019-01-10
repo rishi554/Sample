@@ -1,0 +1,133 @@
+<div class="span3">
+    <div class="control-group">
+        <div class="controls">
+            <h4><u>Account Details:</u></h4><br>
+            <label class="control-label"><b>Account Name:</b></label>
+            <input type="text" class="span3" name="AccountName" ng-model="FormData.AccountName" required />
+            <span style="color:red" ng-show="AccountNameRequired">* Required</span>
+            <label class="control-label"><b>Group Name:</b></label>
+            <select ng-model="FormData.GroupId" class="span3" id="GroupId">
+                <option value=''>--Select Parent Group--</option>
+                <option ng-repeat="PGroup in PGroups" value="{{PGroup.GroupId}}">{{PGroup.GroupName}}</option>
+            </select><br>
+            <a href="#GroupModal" role="button" data-toggle="modal">Add Group</a>
+            <span style="color:red" ng-show="GroupIdRequired">* Required</span>
+            <label class="control-label"><b>Cost Center:</b></label>
+            <label class="radio inline">
+                <input type="radio" name="CostCenter" ng-model="FormData.CostCenter" ng-value="'1'"> Yes
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="CostCenter" ng-model="FormData.CostCenter" ng-value="'0'"> No
+            </label>
+            <span style="color:red" ng-show="CostCenterRequired">* Required</span>
+            <label class="control-label"><b>Bill Wise Details:</b></label>
+            <label class="radio inline">
+                <input type="radio" name="BillWiseDetail" ng-model="FormData.BillWiseDetail" ng-value="'1'"> Yes
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="BillWiseDetail" ng-model="FormData.BillWiseDetail" ng-value="'0'"> No
+            </label>
+            <span style="color:red" ng-show="BillWiseDetailRequired">* Required</span>
+            <label class="control-label"><b>Default Price List:</b></label>
+            <select ng-model="FormData.PriceListId" class="span3" id="PriceListId">
+                <option value=0>--Select Price List--</option>
+            </select>
+            <span style="color:red" ng-show="PriceListIdRequired">* Required</span>
+            <label class="control-label"><b>Use In Pay roll:</b></label>
+            <label class="radio inline">
+                <input type="radio"  name="UseInPayroll" ng-model="FormData.UseInPayroll" ng-value="'1'"> Yes
+            </label>
+            <label class="radio inline">
+                <input type="radio" name="UseInPayroll" ng-model="FormData.UseInPayroll" ng-value="'0'"> No
+            </label>
+            <span style="color:red" ng-show="UseInPayrollRequired">* Required</span>
+            <label class="control-label"><b>Credit Days:</b></label>
+            <input type="number" class="span3" name="CreditDays" ng-model="FormData.CreditDays" required />
+            <span style="color:red" ng-show="CreditDaysRequired">* Required</span>
+            <label class="control-label"><b>Credit Limit:</b></label>
+            <input type="number" step="any" class="span3" name="CreditLimit" ng-model="FormData.CreditLimit" required />
+            <span style="color:red" ng-show="CreditLimitRequired">* Required</span>
+            <label class="control-label"><b>Interest Rate %:</b></label>
+            <input type="number" step="any" class="span3" name="IntRate" ng-model="FormData.IntRate" required />
+            <span style="color:red" ng-show="IntRateRequired">* Required</span>
+            <label class="control-label"><b>Interest Rate Per:</b></label>
+            <select ng-model="FormData.IntRatePer" class="span3" id="IntRatePer">
+                <option value=0>--Select Interest Rate Type--</option>
+                <option ng-repeat="Rate in InterestRate" value="{{Rate.InterestRateId}}">{{Rate.InterestRateTypeName}}</option>
+            </select>
+            <span style="color:red" ng-show="IntRatePerRequired">* Required</span>
+            <label class="control-label"><b>Remarks:</b></label>
+            <textarea type="text" class="span3" name="remarks" ng-model="FormData.remarks" required></textarea>
+            <span style="color:red" ng-show="remarksRequired">* Required</span>
+            <label class="control-label"><b>Teams:</b></label>
+            <select ng-options="Team.id as Team.TeamName for Team in Teams" class="span3" id="WeekDays" ng-model="FormData.TeamId" multiple="multiple"></select><br>
+            <a href="#TeamModal" role="button" data-toggle="modal">Add Team</a>
+            <span style="color:red" ng-show="TeamIdRequired">* Required</span>
+            <h4><u>Address:</u></h4><br>
+            <label class="control-label"><b>Address 1 / Landmark:</b></label>
+            <input type="text" class="span3" name="Address1" ng-model="FormData.Address1" required />
+            <span style="color:red" ng-show="Address1Required">* Required</span>
+            <label class="control-label"><b>Address 2 / Cross Road:</b></label>
+            <input type="text" class="span3" name="Address2" ng-model="FormData.Address2" required />
+            <span style="color:red" ng-show="Address2Required">* Required</span>
+        </div> <!-- /controls -->
+    </div>
+</div>
+<div class="span3">
+    <div class="control-group">	                    
+        <div class="controls">
+            <label class="control-label"><b>Address 3 / Other Instruction:</b></label>
+            <input type="text" class="span3" name="Address3" ng-model="FormData.Address3" required />
+            <span style="color:red" ng-show="Address3Required">* Required</span>
+            <label class="control-label"><b>City:</b></label>
+            <input type="hidden" class="span3" name="CityId" ng-model="FormData.CityId" required />
+            <input type="text" class="span3" name="CityName" ng-model="CityName" ng-keyup="AccountSearchCity(CityName)" autocomplete="off" required />
+            <ul class="list-group" ng-model="AccCityDropdown" ng-hide="AccCityDropdown">
+                <li class="list-group-item" ng-repeat="Location in Locations| filter: CityName as AccountSearchResult" ng-click="FillTextboxAccount(Location)"><a href="#"> {{ Location.CityName}}</a></li>
+            </ul>
+            <p id="LocMsgAcc"></p>
+            <span style="color:red" ng-show="CityIdRequired">* Required</span>
+            <label class="control-label"><b>State:</b></label>
+            <input type="hidden" class="span3" name="StateId" ng-model="FormData.StateId" disabled />
+            <input type="text" class="span3" name="StateName" ng-model="FormData.StateName" disabled />
+            <span style="color:red" ng-show="StateIdRequired">* Required</span>
+            <label class="control-label"><b>Country:</b></label>
+            <input type="hidden" class="span3" name="CountryId" ng-model="FormData.CountryId" disabled />
+            <input type="text" class="span3" name="CountryName" ng-model="FormData.CountryName" disabled />
+            <span style="color:red" ng-show="CountryIdRequired">* Required</span>
+            <label class="control-label"><b>Pincode:</b></label>
+            <input type="text" class="span3" name="pincode" ng-model="FormData.pincode" required />
+            <span style="color:red" ng-show="pincodeRequired">* Required</span>
+            <label class="control-label"><b>Phone:</b></label>
+            <input type="text" class="span3" name="phone" ng-model="FormData.phone" required />
+            <span style="color:red" ng-show="phoneRequired">* Required</span>
+            <label class="control-label"><b>Email:</b></label>
+            <input type="email" class="span3" name="email" ng-model="FormData.email" required />
+            <span style="color:red" ng-show="emailRequired">* Required</span>
+            <label class="control-label"><b>Website:</b></label>
+            <input type="text" class="span3" name="website" ng-model="FormData.website" required />
+            <span style="color:red" ng-show="websiteRequired">* Required</span>
+            <label class="control-label"><b>Contact Person:</b></label>
+            <input type="text" class="span3" name="contactPerson" ng-model="FormData.contactPerson" required />
+            <label class="control-label"><b>Mobile:</b></label>
+            <input type="text" class="span3" name="ContactPersonMobile" ng-model="FormData.ContactPersonMobile" required />
+            <span style="color:red" ng-show="ContactPersonMobileRequired">* Required</span>
+            <h4><u>Tax Information:</u></h4><br>
+            <label class="control-label"><b>CST No:</b></label>
+            <input type="text" class="span3" name="CSTNo" ng-model="FormData.CSTNo" required />
+            <span style="color:red" ng-show="CSTNoRequired">* Required</span>
+            <label class="control-label"><b>VAT No:</b></label>
+            <input type="text" class="span3" name="VATNo" ng-model="FormData.VATNo" required />
+            <span style="color:red" ng-show="VATNoRequired">* Required</span>
+            <label class="control-label"><b>IT PAN No:</b></label>
+            <input type="text" class="span3" name="PANNo" ng-model="FormData.PANNo" required />
+            <span style="color:red" ng-show="PANNoRequired">* Required</span>
+            <label class="control-label"><b>Service Tax No:</b></label>
+            <input type="text" class="span3" name="ServiceTaxNo" ng-model="FormData.ServiceTaxNo" required />
+            <span style="color:red" ng-show="ServiceTaxNoRequired">* Required</span>	
+            <label class="control-label"><b>Vat Class Name:</b></label>
+            <input type="text" class="span3" name="VatClassId" ng-model="FormData.VatClassId" required />
+            <span style="color:red" ng-show="VatClassIdRequired">* Required</span>
+        </div> <!-- /controls -->
+    </div>
+</div>

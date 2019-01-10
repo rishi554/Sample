@@ -1,0 +1,17 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Brand Name:</b></label>
+        <input type="text" class="span4" name="BrandName" ng-model="BrandFormData.BrandName" required />
+        <span style="color:red" ng-show="BrandNameRequired">* Required</span>	
+        <label class="control-label"><b>Company Name:</b></label>
+        <select name="PCompanyId" ng-model="BrandFormData.PCompanyId" class="span4" id="PCompanyId">
+            <option value=''>--Select Company--</option>
+            <option ng-repeat="Company in Companies" value="{{Company.PCompanyId}}">{{Company.PCompanyName}}</option>
+        </select>
+        <br>
+        <a href="#PrincipleCompanyModal" role="button" data-toggle="modal">Add Company</a>
+        <label class="control-label"><b>Area Alloted:</b></label>
+        <input type="number" step="any" class="span4" name="AreaAlloted" ng-model="BrandFormData.AreaAlloted" required />
+        <span style="color:red" ng-show="AreaAllotedRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

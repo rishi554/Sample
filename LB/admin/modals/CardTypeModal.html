@@ -1,0 +1,20 @@
+<div id="CardTypeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="CardTypeController" data-ng-init="init()">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Card Type</h3>
+    </div>
+    <form name="CardTypeForm" novalidate ng-submit="CardTypeFormValidate($event)">
+        <div class="modal-body">
+            <p id="CardTypeNameMsg"></p>
+            <div ng-include="'Controls/CardTypeControl.html'"></div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="span2">
+                <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+                <input type="submit" class="btn btn-primary pull-left" ng-click="CardTypeSave()" value="Save"/>
+            </div>
+        </div>
+    </form>
+</div>

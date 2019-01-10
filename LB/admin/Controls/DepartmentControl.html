@@ -1,0 +1,10 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Department Name:</b></label>
+        <input type="text" class="span4" name="DepartmentName" ng-model="DepartmentFormData.DepartmentName" required />
+        <span style="color:red" ng-show="DepartmentNameRequired">* Required</span>	
+        <label class="control-label"><b>Area Alloted:</b></label>
+        <input type="number" step="any" class="span4" name="AreaAlloted" ng-model="DepartmentFormData.AreaAlloted" required />
+        <span style="color:red" ng-show="AreaAllotedRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

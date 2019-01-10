@@ -1,0 +1,16 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Question Name:</b></label>
+        <input type="text" class="span4" name="QuestionName" ng-model="QuestionFormData.QuestionName" required />
+        <span style="color:red" ng-show="QuestionNameRequired">* Required</span>
+        <label class="control-label"><b>Is Compulsory:</b></label>
+        <label class="radio inline">
+            <input type="radio"  name="IsCompulsory" ng-model="QuestionFormData.EnforceAnswer" ng-value="1"> Yes
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="IsCompulsory" ng-model="QuestionFormData.EnforceAnswer" ng-value="0"> No
+        </label>
+        <label class="control-label"><b>No Of Choice:</b></label>
+        <input type="text" class="span4" name="NoOfChoice" ng-model="QuestionFormData.NoOfChoice"/>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

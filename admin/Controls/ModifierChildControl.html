@@ -1,0 +1,28 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Modifiers:</b></label>
+        <select ng-model="ModifierChildFormData.ModifierId" class="span4" id="ModifierId">
+            <option value=''>--Select Modifier--</option>
+            <option ng-repeat="Modifier in Modifiers" value="{{Modifier.ModifierId}}">{{Modifier.ModifierName}}</option>
+        </select><br>
+        <a href="#ModifierModal" role="button" data-toggle="modal">Add Modifiers</a>
+        <span style="color:red" ng-show="ModifierIdRequired">* Required</span>
+        <label class="control-label"><b>Products:</b></label>
+        <select ng-model="ModifierChildFormData.ProductId" class="span4" id="ProductId">
+            <option value=''>--Select Product--</option>
+            <option ng-repeat="Product in RawProducts" value="{{Product.productId}}">{{Product.ProductName}}</option>
+        </select><br>
+        <a href="ProductInfo.html" role="button">Add Product</a>
+        <label class="control-label"><b>Sub Product Name:</b></label>
+        <input type="text" class="span4" name="DisplayName" ng-model="ModifierChildFormData.DisplayName" />
+        <span style="color:red" ng-show="ProductIdRequired">* Required</span>
+        <label class="control-label"><b>Rate (Price):</b></label>
+        <input type="text" class="span4" name="Rate" ng-model="ModifierChildFormData.Rate" required />
+        <span style="color:red" ng-show="RateRequired">* Required</span>
+        <label class="control-label"><b>Type:</b></label>
+        <select ng-model="ModifierChildFormData.Type" class="span4" id="Type">
+            <option value=''>--Select Type--</option>
+            <option ng-repeat="ModifierType in ModifierTypes" value="{{ModifierType.ModiferTypeId}}">{{ModifierType.TypeName}}</option>
+        </select>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

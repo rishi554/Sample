@@ -1,0 +1,14 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Group Name:</b></label>
+        <input type="text" class="span4" name="GroupName" ng-model="GroupFormData.GroupName" required />
+        <span style="color:red" ng-show="GroupNameRequired">* Required</span>	
+        <label class="control-label"><b>Department Name:</b></label>
+        <select name="Department" ng-model="GroupFormData.DepartmentId" class="span4" id="DepartmentId">
+            <option value=''>--Select Department--</option>
+            <option ng-repeat="Department in Departments" value="{{Department.DeptMasterId}}">{{Department.DeptName}}</option>
+        </select>
+        <br>
+        <a href="#DepartmentModal" role="button" data-toggle="modal">Add Department</a>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

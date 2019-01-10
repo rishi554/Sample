@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Customer Management - Admin Fusion Company Limited.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" >
+        <script src="js/jquery-1.7.2.min.js"></script> 
+        <script src="js/angular.min.js"></script>
+        <!--- Header file is here -->
+    <body ng-app="app" ng-controller="CustomerController" data-ng-init="init()" >
+        <header ng-include="'header.html'"></header>
+        <div class="main">
+            <div class="main-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">      		
+                            <div class="widget ">
+                                <div class="widget-header">
+                                    <i class="icon-user"></i>
+                                    <h3>Customer Information: </h3>(<span style="color:red">*</span>) Indicates Mandatory.
+                                </div> <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <br>
+                                    
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="formcontrols">
+                                            <form id="CustomerForm" name="CustomerForm" novalidate ng-submit="CustomerFormValidate($event)" class="form-horizontal">
+                                                <fieldset>
+                                                    <p id="CustomerMsg"></p>
+                                                    <div class="span5">
+                                                        <div class="control-group">											
+                                                            <h4><u>Customer Details</u></h4>	
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="username">Salutation</label>
+                                                            <div class="controls">
+                                                                <select class="span3" id="Salutation" ng-model="CustFormData.Salutation" name="Salutation">
+                                                                    <option value=''>--Select Salutation--</option>
+                                                                    <option value='Mr'>Mr</option>
+                                                                    <option value='Mrs'>Mrs</option>
+                                                                </select>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="firstname">First Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="firstname" name="firstname" ng-model="CustFormData.firstname" required>
+                                                                <span style="color:red" ng-show="firstnameRequired">*</span>
+                                                            </div> <!-- /controls -->	
+                                                            
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="lastname">Last Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="lastname" name="lastname" ng-model="CustFormData.lastname">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Company">Company Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="CompanyName" name="CompanyName" ng-model="CustFormData.CompanyName" >
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="CustomerType">Customer Type</label>
+                                                            <div class="controls">
+                                                                <select name="CustomerType" ng-model="CustFormData.CustomerType" class="span3" id="CustomerType">
+                                                                    <option value=''>--Select Type--</option>
+                                                                    <option ng-repeat="Type in CustTypeNames" value="{{Type.id}}">{{Type.CusTypeName}}</option>
+                                                                </select><span style="color:red"> <b>*</b></span><br>
+                                                                <a href="#myModal" role="button" data-toggle="modal">Add Type</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="CardTypeName">Card Type Name</label>
+                                                            <div class="controls">
+                                                                <select name="CardTypeName" ng-model="CustFormData.CardTypeName" class="span3" id="CardTypeName">
+                                                                    <option value=''>--Select Type--</option>
+                                                                    <option ng-repeat="Type in CardTypeNames" value="{{Type.cardTypeID}}">{{Type.CardTypeName}}</option>
+                                                                </select>
+                                                                <span style="color:red"> <b>*</b></span><br>
+                                                                <a href="#CardTypeModal" role="button" data-toggle="modal">Add Type</a>
+                                                            </div>
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label">Allow Credit Sale</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="AllowCreditSale" ng-model="CustFormData.AllowCreditSale" ng-value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="AllowCreditSale" ng-model="CustFormData.AllowCreditSale" ng-value="0"> No
+                                                                </label>
+                                                            </div>	<!-- /controls -->			
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label">Account</label>
+                                                            <div class="controls">	
+                                                                <select name="selectedAccount" ng-model="CustFormData.selectedAccount" class="span3" id="selectedAccount">
+                                                                    <option value=''>--Select Account--</option>
+                                                                    <option ng-repeat="Account in Accounts" value="{{Account.AccountId}}">{{Account.AccountName}}</option>
+                                                                </select><span style="color:red"> <b>*</b></span><br>
+                                                                <a href="#AccountModal" role="button" data-toggle="modal">Add Account</a>
+                                                            </div> <!-- /controls -->
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="OtherInfo">Other Information</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="OtherInfo" name="OtherInfo" ng-model="CustFormData.OtherInfo">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <p><h4><u>Type</u></h4></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="OpeningPoint">Opening Point</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="OpeningPoint" name="OpeningPoint" ng-model="CustFormData.OpeningPoint">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="CardIssueDate">Card Issue Date</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span3" id="CardIssueDate" name="CardIssueDate" ng-model="CustFormData.CardIssueDate">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group --><div class="control-group">											
+                                                            <label class="control-label" for="CardExpiryDate">Card Expiry Date</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span3" id="CardExpiryDate" name="CardExpiryDate" ng-model="CustFormData.CardExpiryDate">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="LocationId">Location</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="LocationId" name="LocationId" ng-model="CustFormData.LocationId">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Teams">Teams</label>
+                                                            <div class="controls">
+                                                                <select ng-options="Team.id as Team.TeamName for Team in Teams" class="span3" id="WeekDays" ng-model="CustFormData.CustTeamId" multiple="multiple"></select>
+                                                                <br>
+                                                                <a href="#TeamModal" role="button" data-toggle="modal">Add Team</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Personal Info</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Nationality">Nationality</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="Nationality" name="Nationality" ng-model="CustFormData.Nationality">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label">Gender</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="Gender" ng-model="CustFormData.Gender"> Male
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="Gender" ng-model="CustFormData.Gender"> Female
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="Gender" ng-model="CustFormData.Gender"> Other
+                                                                </label>
+                                                            </div>	<!-- /controls -->			
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="BirthDate">Birth Date</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span3" id="BirthDate" name="BirthDate" ng-model="CustFormData.BirthDate">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="SpouseName">Spouse Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="SpouseName" name="SpouseName" ng-model="CustFormData.SpouseName">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AnniversaryDate">Anniversary Date</label>
+                                                            <div class="controls">
+                                                                <input type="date" class="span3" id="AnniversaryDate" name="AnniversaryDate" ng-model="CustFormData.AnniversaryDate">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                    </div>
+                                                    <div class="span5">
+                                                        <div class="control-group">											
+                                                            <h4><u>Address & Contact Info (Main)</u></h4>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="AddressLandmark">Address 1 / Landmark</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="AddressLandmark" name="AddressLandmark" ng-model="CustFormData.AddressLandmark">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AddressCrossRoad">Address 2 / Cross Road</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="AddressCrossRoad" name="AddressCrossRoad" ng-model="CustFormData.AddressCrossRoad">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AddressOtherInstruct">Address 3 / Other Info.</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="AddressOtherInstruct" name="AddressOtherInstruct" ng-model="CustFormData.AddressOtherInstruct">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="City">City</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" class="span3" id="MainCityId" name="MainCityId" ng-model="CustFormData.MainCityId">
+                                                                <input type="text" class="span3" id="MainCity" name="MainCity" ng-model="MainCity" ng-keyup="CustomerSearchMainCity(MainCity)" autocomplete="off" required />
+                                                                <ul class="list-group" ng-model="CustMainCityDropdown" ng-hide="CustMainCityDropdown">
+                                                                    <li class="list-group-item" ng-repeat="Location in Locations | filter: MainCity as CustomerSearchMainResult" ng-click="FillTextboxCustomerMain(Location)"><a href="#"> {{ Location.CityName}}</a></li>
+                                                                </ul>
+                                                                <p id="LocMsgMain"></p>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label">State</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" class="span3" id="MainStateId" name="MainStateId" ng-model="CustFormData.MainStateId">
+                                                                <input type="text" class="span3" id="MainState" name="MainState" ng-model="CustFormData.MainState" disabled>
+                                                            </div>	<!-- /controls -->			
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Country">Country</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" class="span3" id="MainCountryId" name="MainCountryId" ng-model="CustFormData.MainCountryId">
+                                                                <input type="text" class="span3" id="MainCountry" name="MainCountry" ng-model="CustFormData.MainCountry" disabled>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="PostalCode">Postal Code</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="PostalCode" name="PostalCode" ng-model="CustFormData.PostalCode">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Phone">Phone</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="Phone" name="Phone" ng-model="CustFormData.Phone">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Mobile">Mobile</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="Mobile" name="Mobile" ng-model="CustFormData.Mobile">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Fax">Fax</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="Fax" name="Fax" ng-model="CustFormData.Fax">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Email">Email</label>
+                                                            <div class="controls">
+                                                                <input type="email" class="span3" id="Email" name="Email" ng-model="CustFormData.Email">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Website">Website</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="Website" name="Website" ng-model="CustFormData.Website">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="GSTINNo">GSTIN No</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="GSTINNo" name="GSTINNo" ng-model="CustFormData.GSTINNo">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ProfileImage">Profile Image</label>
+                                                            <div class="controls">
+                                                                <input type="file" class="span3" id="ProfileImage" name="ProfileImage" ng-model="CustFormData.ProfileImage">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Alternative Address & Contact Info</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="altAddressLandmark">Address 1 / Landmark</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="altAddressLandmark" name="altAddressLandmark" ng-model="CustFormData.altAddressLandmark">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="altAddressCrossRoad">Address 2 / Cross Road</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="altAddressCrossRoad" name="altAddressCrossRoad" ng-model="CustFormData.altAddressCrossRoad">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="altAddressOtherInstruct">Address 3 / Other Info.</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="altAddressOtherInstruct" name="altAddressOtherInstruct" ng-model="CustFormData.altAddressOtherInstruct">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="altCity">City</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" class="span3" id="altCityId" name="altCityId" ng-model="CustFormData.altCityId">
+                                                                <input type="text" class="span3" id="altCity" name="altCity" ng-model="altCity" ng-keyup="CustomerSearchCity(altCity)" autocomplete="off" required />
+                                                                <ul class="list-group" ng-model="CustCityDropdown" ng-hide="CustCityDropdown">
+                                                                    <li class="list-group-item" ng-repeat="Location in Locations | filter: altCity as CustomerSearchResult" ng-click="FillTextboxCustomer(Location)"><a href="#"> {{ Location.CityName}}</a></li>
+                                                                </ul>
+                                                                <p id="LocMsgCust"></p>
+                                                                <span style="color:red" ng-show="altCityRequired">* Required</span>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label">State</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" class="span3" id="altStateId" name="altStateId" ng-model="CustFormData.altStateId">
+                                                                <input type="text" class="span3" id="altState" name="altState" ng-model="CustFormData.altState" disabled>
+                                                            </div>	<!-- /controls -->			
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="altCountry">Country</label>
+                                                            <div class="controls">
+                                                                <input type="hidden" class="span3" id="altCountryId" name="altCountryId" ng-model="CustFormData.altCountryId">
+                                                                <input type="text" class="span3" id="altCountry" name="altCountry" ng-model="CustFormData.altCountry" disabled>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="altPostalCode">Postal Code</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="altPostalCode" name="altPostalCode" ng-model="CustFormData.altPostalCode">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    
+                                                    <div class="form-actions">
+                                                        <button type="submit" class="btn btn-primary btn-large" ng-click="CustomerForm.$valid && CustomerSave()">Save</button>
+                                                        <a href="#CustListModal" data-toggle="modal" class="btn btn-warning btn-large">List</a>
+                                                        <button class="btn btn-large" ng-click="reset()">Reset</button>
+                                                    </div> <!-- /form-actions -->
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> <!-- /widget-content -->
+                            </div> <!-- /widget -->
+                        </div> <!-- /span8 -->
+                    </div> <!-- /row -->
+                </div> <!-- /container -->
+            </div> <!-- /main-inner -->
+        </div> <!-- /main -->
+        <script src="app/app.js"></script> 
+        <div ng-include="'modals/CustomerTypeModal.html'"></div>
+        <div ng-include="'modals/CardTypeModal.html'"></div>
+        <div ng-include="'modals/AccountModal.html'"></div>
+        <div ng-include="'modals/GroupModal.html'"></div>
+        <div ng-include="'modals/GroupTypeModal.html'"></div>
+        <div ng-include="'modals/LocationModal.html'"></div>
+        <div ng-include="'modals/TeamModal.html'"></div>
+        <div ng-include="'lists/CustListModal.html'"></div>
+        <div ng-include="'footer.html'"></div>
+

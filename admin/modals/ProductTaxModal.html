@@ -1,0 +1,16 @@
+<div id="ProductTaxModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="ProductTaxController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Tax</h3>
+    </div>
+    <form name="ProductTaxForm" id="ProductTaxForm" novalidate ng-submit="ProductTaxFormValidate($event)">
+        <div class="modal-body">
+            <p id="ProductTaxMsg"></p>
+            <div ng-include="'Controls/ProductTaxControl.html'"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="ProductTaxForm.$valid && ProductTaxSave()" value="Save"/>
+        </div>
+    </form>
+</div>

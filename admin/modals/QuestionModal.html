@@ -1,0 +1,16 @@
+<div id="QuestionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="QuestionController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Questions</h3>
+    </div>
+    <form name="QuestionForm" id="QuestionForm" novalidate ng-submit="QuestionFormValidate($event)">
+        <div class="modal-body">
+            <p id="QuestionMsg"></p>
+            <div ng-include="'Controls/ForcedQuestionControl.html'"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="QuestionForm.$valid && QuestionSave()" value="Save"/>
+        </div>
+    </form>
+</div>

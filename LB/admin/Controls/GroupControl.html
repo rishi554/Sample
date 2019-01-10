@@ -1,0 +1,20 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Group Name:</b></label>
+        <input type="text" class="span4" name="GroupName" ng-model="FormData.GroupName" required />
+        <span style="color:red" ng-show="GroupNameRequired">* Required</span>
+        <label class="control-label"><b>Parent Group Name:</b></label>
+        <select ng-model="FormData.GroupId" class="span4" id="PGroupName">
+            <option value=''>--Select Parent Group--</option>
+            <option ng-repeat="PGroup in PGroups" value="{{PGroup.GroupId}}">{{PGroup.GroupName}}</option>
+        </select>
+        <span style="color:red" ng-show="PGroupNameRequired">* Required</span>
+        <label class="control-label"><b>Group Type:</b></label>
+        <select ng-model="FormData.GroupType" class="span4" id="GroupType">
+            <option value=''>--Select Group Type--</option>
+            <option ng-repeat="GroupType in GroupTypes" value="{{GroupType.id}}">{{GroupType.group_typeName}}</option>
+        </select><br>
+        <a href="#GroupTypeModal" role="button" data-toggle="modal">Add Type</a>
+        <span style="color:red" ng-show="GroupTypeRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

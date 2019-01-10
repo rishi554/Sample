@@ -1,0 +1,23 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Flavors:</b></label>
+        <select ng-model="FlavorChildFormData.FlavorId" class="span4" id="FlavorId">
+            <option value=''>--Select Flavor--</option>
+            <option ng-repeat="Flavor in Flavors" value="{{Flavor.FlavorMasterId}}">{{Flavor.FlavorMasterName}}</option>
+        </select><br>
+        <a href="#FlavorModal" role="button" data-toggle="modal">Add Flavors</a>
+        <span style="color:red" ng-show="FlavorIdRequired">* Required</span>
+        <label class="control-label"><b>Products:</b></label>
+        <select ng-model="FlavorChildFormData.ProductId" class="span4" id="ProductId">
+            <option value=''>--Select Product--</option>
+            <option ng-repeat="Product in Products" value="{{Product.productId}}">{{Product.ProductName}}</option>
+        </select><br>
+        <a href="ProductInfo.html" role="button">Add Product</a>
+        <span style="color:red" ng-show="ProductIdRequired">* Required</span>
+        <label class="control-label"><b>Rate (Price):</b></label>
+        <input type="text" class="span4" name="Rate" ng-model="FlavorChildFormData.Rate" required />
+        <span style="color:red" ng-show="RateRequired">* Required</span>
+        <label class="control-label"><b>Description:</b></label>
+        <textarea class="span4" ng-model="FlavorChildFormData.Description"></textarea>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

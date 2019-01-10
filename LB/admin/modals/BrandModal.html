@@ -1,0 +1,16 @@
+<div id="BrandModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="BrandController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Brand</h3>
+    </div>
+    <form name="BrandForm" novalidate ng-submit="BrandFormValidate($event)">
+        <div class="modal-body">
+            <p id="BrandMsg"></p>
+            <div ng-include="'Controls/BrandControl.html'"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="BrandForm.$valid && BrandSave()" value="Save"/>
+        </div>
+    </form>
+</div>

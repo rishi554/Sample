@@ -1,0 +1,37 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Matrix Name:</b></label>
+        <input type="text" class="span4" name="MatrixName" ng-model="MatrixFormData.MatrixName" required />
+        <span style="color:red" ng-show="MatrixNameRequired">* Required</span>
+        <label class="control-label"><b>List 1 Name:</b></label>
+        <input type="text" class="span4" name="List1Name" ng-model="MatrixFormData.List1Name" required />
+        <span style="color:red" ng-show="List1NameRequired">* Required</span>	
+        <label class="control-label"><b>Select List 1:</b></label>
+        <select name="List1Id" ng-model="MatrixFormData.List1Id" class="span4" id="List1Id">
+            <option value=''>--Select List--</option>
+            <option ng-repeat="List in Lists" value="{{List.ListTypeId}}">{{List.ListTypeName}}</option>
+        </select>
+        <br>
+        <a href="#MatrixListModal" role="button" data-toggle="modal">Add Matrix List</a>
+        <label class="control-label"><b>List 2 Name:</b></label>
+        <input type="text" class="span4" name="List2Name" ng-model="MatrixFormData.List2Name" required />
+        <span style="color:red" ng-show="List2NameRequired">* Required</span>	
+        <label class="control-label"><b>Select List 2:</b></label>
+        <select name="ListId" ng-model="MatrixFormData.List2Id" class="span4" id="List2Id">
+            <option value=''>--Select List--</option>
+            <option ng-repeat="List in Lists" value="{{List.ListTypeId}}">{{List.ListTypeName}}</option>
+        </select>
+        <br>
+        <a href="#MatrixListModal" role="button" data-toggle="modal">Add Matrix List</a>
+        <label class="control-label"><b>List 3 Name:</b></label>
+        <input type="text" class="span4" name="List3Name" ng-model="MatrixFormData.List3Name" required />
+        <span style="color:red" ng-show="List3NameRequired">* Required</span>	
+        <label class="control-label"><b>Select List 3:</b></label>
+        <select name="List2Id" ng-model="MatrixFormData.List3Id" class="span4" id="List3Id">
+            <option value=''>--Select List--</option>
+            <option ng-repeat="List in Lists" value="{{List.ListTypeId}}">{{List.ListTypeName}}</option>
+        </select>
+        <br>
+        <a href="#MatrixListModal" role="button" data-toggle="modal">Add Matrix List</a>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

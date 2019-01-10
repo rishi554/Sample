@@ -1,0 +1,20 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Parent Group Name:</b></label>
+        <select name="GroupId" ng-model="SubgroupFormData.GroupId" class="span4" id="GroupId" required="">
+            <option value=''>--Select Group--</option>
+            <option ng-repeat="group in groups" value="{{group.PGroupMId}}">{{group.PGroupMName}}</option>
+        </select>
+        <br>
+        <a href="#ProductGroupModal" role="button" data-toggle="modal">Add Group</a>
+        <span style="color:red" ng-show="GroupNameRequired">* Required</span>
+        <label class="control-label"><b>Group Name:</b></label>
+        <select name="Department" ng-model="SubgroupFormData.ParentGroupId" class="span4" id="ParentGroupId">
+            <option value=''>--None--</option>
+            <option ng-repeat="subgroup in subgroups" value="{{subgroup.PSubGroupId}}">{{subgroup.ProductSubGroupName}}</option>
+        </select>
+        <label class="control-label"><b>Subgroup Name:</b></label>
+        <input type="text" class="span4" name="SubgroupName" ng-model="SubgroupFormData.SubgroupName" required />
+        <span style="color:red" ng-show="SubgroupNameRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

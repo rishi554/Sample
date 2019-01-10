@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="ProductController" data-ng-init="init()">
+    <head>
+        <meta charset="utf-8">
+        <title>Product Management - Almaa Computers.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes" >
+        <script src="js/jquery-1.7.2.min.js"></script> 
+        <script src="js/angular.min.js"></script>
+        <!--- Header file is here -->
+    <body>
+        <header ng-include="'header.html'"></header>
+        <div class="main">
+            <div class="main-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">      		
+                            <div class="widget ">
+                                <div class="widget-header">
+                                    <i class="icon-align-justify"></i>
+                                    <h3>Product Information</h3>
+                                </div> <!-- /widget-header -->
+                                <div class="widget-content">
+                                    <br>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="jscontrols">
+                                            
+                                            <form id="ProductForm" name="ProductForm" class="form-horizontal">
+                                                <fieldset>
+                                                    <p id="ProductMsg"></p>
+                                                    <div class="span5">
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Product Details</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ProductName">Product Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="ProductName" ng-model="ProductFormData.ProductName">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="PrintName">Print Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="PrintName" ng-model="ProductFormData.PrintName" value="{{ ProductFormData.ProductName }}" disabled>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="UPCEAN">UPC / EAN</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="UPCEAN" ng-model="ProductFormData.UPCEAN">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="UPCEAN1">UPC / EAN 1</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="UPCEAN1" ng-model="ProductFormData.UPCEAN1">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="UPCEAN2">UPC / EAN 2</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="UPCEAN2" ng-model="ProductFormData.UPCEAN2">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="UPCEAN3">UPC / EAN 3</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="UPCEAN3" ng-model="ProductFormData.UPCEAN3">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="UserDefinedCode">User Defined Code</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="UserDefinedCode" ng-model="ProductFormData.UserDefinedCode">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Brand & Grouping</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="PCompanyId">Principle Company</label>
+                                                            <div class="controls">
+                                                                <select name="PCompanyId" ng-model="ProductFormData.PCompanyId" class="span3" id="PCompanyId">
+                                                                    <option value=''>--Select Company--</option>
+                                                                    <option ng-repeat="Company in Companies" value="{{Company.PCompanyId}}">{{Company.PCompanyName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#PrincipleCompanyModal" role="button" data-toggle="modal">Add Company</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Brand">Brand</label>
+                                                            <div class="controls">
+                                                                <select name="CustomerType" ng-model="ProductFormData.BrandId" class="span3" id="BrandId">
+                                                                    <option value=''>--Select Brand--</option>
+                                                                    <option ng-repeat="Brand in Brands" value="{{Brand.BrandId}}">{{Brand.BrandName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#BrandModal" role="button" data-toggle="modal">Add Brand</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Department">Department</label>
+                                                            <div class="controls">
+                                                                <select name="Department" ng-model="ProductFormData.DepartmentId" class="span3" id="DepartmentId">
+                                                                    <option value=''>--Select Department--</option>
+                                                                    <option ng-repeat="Department in Departments" value="{{Department.DeptMasterId}}">{{Department.DeptName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#DepartmentModal" role="button" data-toggle="modal">Add Department</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="GroupName">Group Name</label>
+                                                            <div class="controls">
+                                                                <select name="GroupNameId" ng-model="ProductFormData.GroupNameId" class="span3" id="GroupNameId">
+                                                                    <option value=''>--Select Group--</option>
+                                                                    <option ng-repeat="group in groups" value="{{group.PGroupMId}}">{{group.PGroupMName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#ProductGroupModal" role="button" data-toggle="modal">Add Group</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="SubGroup">Sub Group</label>
+                                                            <div class="controls">
+                                                                <select name="SubGroupId" ng-model="ProductFormData.SubGroupId" class="span3" id="SubGroupId">
+                                                                    <option value=''>--Select Subgroup--</option>
+                                                                    <option ng-repeat="subgroup in subgroups" value="{{subgroup.PSubGroupId}}">{{subgroup.ProductSubGroupName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#ProductsubgroupModal" role="button" data-toggle="modal">Add Subgroup</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="BinLocation">Bin Location</label>
+                                                            <div class="controls">
+                                                                <input type="text" class="span3" id="BinLocation"ng-model="ProductFormData.BinLocation">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Tax</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="PurchaseTax">Tax at Purchase</label>
+                                                            <div class="controls">
+                                                                <select name="PurchaseTaxId" ng-model="ProductFormData.PurchaseTaxId" class="span3" id="PurchaseTaxId">
+                                                                    <option value=''>--Select Purchase Tax--</option>
+                                                                    <option ng-repeat="Tax in Taxes" value="{{Tax.TaxId}}">{{Tax.TaxName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#ProductTaxModal" role="button" data-toggle="modal">Add Tax</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="SaleTaxId">Tax at Sale</label>
+                                                            <div class="controls">
+                                                                 <select name="SaleTaxId" ng-model="ProductFormData.SaleTaxId" class="span3" id="SaleTaxId">
+                                                                    <option value=''>--Select Sale Tax--</option>
+                                                                    <option ng-repeat="Tax in Taxes" value="{{Tax.TaxId}}">{{Tax.TaxName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#ProductTaxModal" role="button" data-toggle="modal">Add Tax</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ProductImage1">Product Image 1</label>
+                                                            <div class="controls">
+                                                                <input type="file" class="span3" id="ProductImage1" ng-model="ProductFormData.ProductImage1">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ProductImage2">Product Image 2</label>
+                                                            <div class="controls">
+                                                                <input type="file" class="span3" id="ProductImage2" ng-model="ProductFormData.ProductImage2">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                    </div>
+                                                    <div class="span5">
+                                                        <div class="control-group">											
+                                                            <p><u><h4>Others</h4></u></p>		
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="StockUnit">Stock Unit</label>
+                                                            <div class="controls">
+                                                                <select name="UnitId" ng-model="ProductFormData.UnitId" class="span3" id="UnitId">
+                                                                    <option value=''>--Select Unit--</option>
+                                                                    <option ng-repeat="Unit in Units" value="{{Unit.UnitId}}">{{Unit.UnitName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#UnitModal" role="button" data-toggle="modal">Add Unit</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AlternateUnit">Alternate Unit</label>
+                                                            <div class="controls">
+                                                                <select name="AltUnitId" ng-model="ProductFormData.AltUnitId" class="span3" id="AltUnitId">
+                                                                    <option value=''>--Select Alternate Unit--</option>
+                                                                    <option ng-repeat="Unit in Units" value="{{Unit.UnitId}}">{{Unit.UnitName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#UnitModal" role="button" data-toggle="modal">Add Unit</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ChangeConversionFlag">Change Conversion</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="ChangeConversionFlag" ng-model="ProductFormData.ChangeConversionFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="ChangeConversionFlag" ng-model="ProductFormData.ChangeConversionFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="MatrixId">Matrix Name</label>
+                                                            <div class="controls">
+                                                                <select name="MatrixId" ng-model="ProductFormData.MatrixId" class="span3" id="MatrixId">
+                                                                    <option value=''>--Select Matrix--</option>
+                                                                    <option ng-repeat="Matrix in Matrixs" value="{{Matrix.MatrixId}}">{{Matrix.MatrixName}}</option>
+                                                                </select>
+                                                                <br>
+                                                                <a href="#MatrixModal" role="button" data-toggle="modal">Add Matrix</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="GenerateProductChildFlag">Generate Product Child</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="GenerateProductChildFlag" ng-model="ProductFormData.GenerateProductChildFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="GenerateProductChildFlag" ng-model="ProductFormData.GenerateProductChildFlag" value="0"> No
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="GenerateProductChildFlag" ng-model="ProductFormData.GenerateProductChildFlag" value="2"> Unique
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="GenerateProductChildFlag" ng-model="ProductFormData.GenerateProductChildFlag" value="3"> New
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="PrintCodeFlag">Print Barcode</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="PrintCodeFlag" ng-model="ProductFormData.PrintCodeFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="PrintCodeFlag" ng-model="ProductFormData.PrintCodeFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="BarcodeRation">Print Barcode Ration(Qty/X)</label>
+                                                            <div class="controls">
+                                                                <input type="number" class="span3" id="BarcodeRation" ng-model="ProductFormData.BarcodeRation">
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="OtherInfo">Other Info</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="OtherInfoFlag" ng-model="ProductFormData.OtherInfoFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="OtherInfoFlag" ng-model="ProductFormData.OtherInfoFlag" value="0"> No
+                                                                </label>
+                                                            </div>	<!-- /controls -->			
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AskQuestionFlag">POS: Ask Quantity</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="AskQuestionFlag" ng-model="ProductFormData.AskQuantityFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="AskQuestionFlag" ng-model="ProductFormData.AskQuantityFlag" value="0"> No
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="AskQuestionFlag" ng-model="ProductFormData.AskQuantityFlag" value="2"> Scale
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AskRateFlag">POS: Ask Rate</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="AskRateFlag" ng-model="ProductFormData.AskRateFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="AskRateFlag" ng-model="ProductFormData.AskRateFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AskContainerFlag">POS: Ask Container</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="AskContainerFlag" ng-model="ProductFormData.AskContainerFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="AskContainerFlag" ng-model="ProductFormData.AskContainerFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="AskFIFOFlag">POS: Use FIFO</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="AskFIFOFlag" ng-model="ProductFormData.AskFIFOFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="AskFIFOFlag" ng-model="ProductFormData.AskFIFOFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="POSMessage">POS: Message</label>
+                                                            <div class="controls">
+                                                                <textarea  name="POSMessage" id="POSMessage" ng-model="ProductFormData.POSMessage"></textarea>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="POSRemark">POS: Remark</label>
+                                                            <div class="controls">
+                                                                <textarea  name="POSRemark" id="POSRemark" ng-model="ProductFormData.POSRemark"></textarea>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ItemTypeId">Item Type</label>
+                                                            <div class="controls">
+                                                                <select name="ItemTypeId" ng-model="ProductFormData.ItemTypeId" class="span3" id="ItemTypeId">
+                                                                    <option value=''>--Select Item Type--</option>
+                                                                    <option ng-repeat="ItemType in ItemTypes" value="{{ItemType.TypeId}}">{{ItemType.TypeName}}</option>
+                                                                </select>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="ProductionFromSaleFlag">Generate Production from Sale</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="ProductionFromSaleFlag" ng-model="ProductFormData.ProductionFromSaleFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="ProductionFromSaleFlag" ng-model="ProductFormData.ProductionFromSaleFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="WeighingSaleFlag">Weighing Scale Export</label>
+                                                            <div class="controls">
+                                                                <label class="radio inline">
+                                                                    <input type="radio"  name="WeighingSaleFlag" ng-model="ProductFormData.WeighingSaleFlag" value="1"> Yes
+                                                                </label>
+                                                                <label class="radio inline">
+                                                                    <input type="radio" name="WeighingSaleFlag" ng-model="ProductFormData.WeighingSaleFlag" value="0"> No
+                                                                </label>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                         <div class="control-group">											
+                                                            <label class="control-label" for="WeighingSaleConversionFlag">Weighing Scale Conversion</label>
+                                                            <div class="controls">
+                                                                    <input type="number"  name="WeighingSaleConversionFlag" id="WeighingSaleConversionFlag" ng-model="ProductFormData.WeighingSaleConversionFlag"/>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                        <div class="control-group">											
+                                                            <label class="control-label" for="Teams">Teams</label>
+                                                            <div class="controls">
+                                                                <select ng-options="Team.id as Team.TeamName for Team in Teams" class="span3" id="WeekDays" ng-model="ProductFormData.ProductTeamId" multiple="multiple"></select>
+                                                                <br>
+                                                                <a href="#TeamModal" role="button" data-toggle="modal">Add Team</a>
+                                                            </div> <!-- /controls -->				
+                                                        </div> <!-- /control-group -->
+                                                    </div><div class="clearfix"></div>
+                                                    <div class="form-actions">
+                                                        <button type="submit" class="btn btn-primary btn-large" ng-click="ProductForm.$valid && ProductSave()">Save</button>
+                                                        <a href="#ProductListModal" data-toggle="modal" class="btn btn-warning btn-large">List</a>
+                                                        <button class="btn btn-large" ng-click="ProductFormReset()">Reset</button>
+                                                    </div> <!-- /form-actions -->
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> <!-- /widget-content -->
+                            </div> <!-- /widget -->
+                        </div> <!-- /span8 -->
+                    </div> <!-- /row -->
+                </div> <!-- /container -->
+            </div> <!-- /main-inner -->
+        </div> <!-- /main -->
+        <script src="app/productApp.js"></script> 
+        <div ng-include="'lists/ProductListModal.html'"></div>
+        <div ng-include="'modals/TeamModal.html'"></div>
+        <div ng-include="'modals/BrandModal.html'"></div>
+        <div ng-include="'modals/PrincipleCompanyModal.html'"></div>
+        <div ng-include="'modals/SubgroupModal.html'"></div>
+        <div ng-include="'modals/ProductGroupModal.html'"></div>
+        <div ng-include="'modals/DepartmentModal.html'"></div>
+        <div ng-include="'modals/ProductTaxModal.html'"></div>
+        <div ng-include="'modals/ProductUnitModal.html'"></div>
+        <div ng-include="'modals/MatrixModal.html'"></div>
+        <div ng-include="'modals/MatrixListModal.html'"></div>
+        <div ng-include="'modals/ListModal.html'"></div>
+        <div ng-include="'footer.html'"></div>
+

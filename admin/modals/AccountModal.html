@@ -1,0 +1,17 @@
+<div id="AccountModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="AccountController">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add Account</h3>
+    </div>
+    <form name="AccountForm" novalidate ng-submit="AccountFormValidate($event)">
+        <div class="modal-body">
+            <p id="AccountMsg"></p>
+            <div ng-include="'Controls/AccountControl.html'"></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn pull-left" data-dismiss="modal" aria-hidden="true">Close</button>
+            <input type="submit" class="btn btn-primary pull-left" ng-click="AccountForm.$valid && AccountSave()" value="Save"/>
+        </div>
+    </form>
+</div>

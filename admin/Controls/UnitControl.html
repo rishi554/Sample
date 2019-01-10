@@ -1,0 +1,13 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Unit Name:</b></label>
+        <input type="text" class="span4" name="TaxName" ng-model="UnitFormData.UnitName" required />
+        <span style="color:red" ng-show="UnitNameRequired">* Required</span>
+        <label class="control-label"><b>Formal Name:</b></label>
+        <input type="text" class="span4" name="FormalName" ng-model="UnitFormData.FormalName" required />
+        <span style="color:red" ng-show="FormalNameRequired">* Required</span>
+        <label class="control-label"><b>Digit After Decimal:</b></label>
+        <input type="text" class="span4" name="DigitAfterDecimal" ng-model="UnitFormData.DigitAfterDecimal" required />
+        <span style="color:red" min="1" ng-show="DigitAfterDecimalRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

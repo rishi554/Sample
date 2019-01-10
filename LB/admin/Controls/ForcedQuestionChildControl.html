@@ -1,0 +1,24 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Questions:</b></label>
+        <select ng-model="ForcedQuestionChildFormData.ForcedQuestionId" class="span4" id="ForcedQuestionId">
+            <option value=''>--Select Question--</option>
+            <option ng-repeat="Question in Questions" value="{{Question.ForcedQueId}}">{{Question.ForcedQueName}}</option>
+        </select><br>
+        <a href="#QuestionModal" role="button" data-toggle="modal">Add Questions</a>
+        <span style="color:red" ng-show="ForcedQuestionIdRequired">* Required</span>
+        <label class="control-label"><b>Products:</b></label>
+        <select ng-model="ForcedQuestionChildFormData.ProductId" class="span4" id="ProductId">
+            <option value=''>--Select Product--</option>
+            <option ng-repeat="Product in Products" value="{{Product.productId}}">{{Product.ProductName}}</option>
+        </select><br>
+        <a href="ProductInfo.html" role="button">Add Product</a>
+        <span style="color:red" ng-show="ProductIdRequired">* Required</span>
+        <label class="control-label"><b>Rate (Price):</b></label>
+        <input type="text" class="span4" name="Rate" ng-model="ForcedQuestionChildFormData.Rate" required />
+        <span style="color:red" ng-show="RateRequired">* Required</span>
+        <label class="control-label"><b>Quantity:</b></label>
+        <input type="text" class="span4" name="Quantity" ng-model="ForcedQuestionChildFormData.Quantity" required />
+        <span style="color:red" ng-show="QuantityRequired">* Required</span>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

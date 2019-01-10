@@ -1,0 +1,12 @@
+<div class="control-group">											
+    <div class="controls">
+        <label class="control-label"><b>Modifier Name:</b></label>
+        <input type="text" class="span4" name="ModifierName" ng-model="ModifierFormData.ModifierName" required />
+        <span style="color:red" ng-show="ModifierNameRequired">* Required</span>
+        <label class="control-label"><b>Grouping On:</b></label>
+        <select ng-model="ModifierFormData.GroupingId" class="span4" id="ModifierId">
+            <option value=''>--Select Grouping--</option>
+            <option ng-repeat="Group in Groups" value="{{Group.GroupingId}}">{{Group.GroupingName}}</option>
+        </select>
+    </div> <!-- /controls -->				
+</div> <!-- /control-group -->

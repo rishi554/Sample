@@ -1,0 +1,89 @@
+<html ng-app="webApp" ng-controller="LoginController">
+    <head>
+        <title>Urban Tadaka E-Commerce Online Ordering | Login :: ALMAA Computers</title>
+        <!-- for-mobile-apps -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="" />
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script src="admin/js/angular.min.js"></script>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <header ng-include="'header.html'"></header>
+    <!-- products-breadcrumb -->
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="/">Home</a><span>|</span></li>
+                <li>Sign In & Sign Up</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //products-breadcrumb -->
+    <!-- banner -->
+    <div class="banner">
+        <div class="w3l_banner_nav_right">
+            <!-- login -->
+            <div class="w3_login">
+                <h3>Sign In & Sign Up</h3>
+                <div class="w3_login_module">
+                    <div class="module form-module">
+                        <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+                            <div class="tooltip">Register Here</div>
+                        </div>
+                        <div class="form">
+                            <h2>Login to your account</h2>
+
+                            <p id="LoginUserMsg"></p>
+                            <form name="LoginUserForm" id="LoginUserForm" novalidate ng-submit="LoginUserFormValidate($event)">
+                                <input type="text" name="LoginUserFormData.Username" ng-model="LoginUserFormData.Username" placeholder="Username" required="">
+                                <span style="color:red" ng-show="LoginUserNameRequired">*</span>
+                                <input type="password" name="LoginUserFormData.Password" ng-model="LoginUserFormData.Password" placeholder="Password" required="">
+                                <span style="color:red" ng-show="LoginUserPasswordRequired">*</span>
+                                <input type="submit" value="Login" ng-click="LoginUserForm.$valid && LoginUser()">
+                            </form>
+                        </div>
+                        <div class="form">
+                            <h2>Create an account</h2>
+                            <form name="UserForm" id="UserForm" novalidate ng-submit="UserFormValidate($event)">
+                                <p id="UserRegistrationMsg"></p>
+                                <input type="text" name="UserFormData.firstname" ng-model="UserFormData.firstname" placeholder="First Name" required>
+                                <span style="color:red" ng-show="firstnameRequired">*</span>
+                                <input type="text" name="UserFormData.lastname" ng-model="UserFormData.lastname" placeholder="Last Name" required>
+                                <span style="color:red" ng-show="lastnameRequired">*</span>
+                                <input type="password" name="UserFormData.Password" ng-model="UserFormData.Password" placeholder="Password" required>
+                                <span style="color:red" ng-show="PasswordRequired">*</span>
+                                <input type="email" name="UserFormData.Email" ng-model="UserFormData.Email" placeholder="Email Address" required>
+                                <span style="color:red" ng-show="UserEmailIdRequired">*</span>
+                                <input type="number" name="UserFormData.Mobile" ng-model="UserFormData.Mobile" placeholder="Mobile Number" required>
+                                <span style="color:red" ng-show="UserMobileNoRequired">*</span>
+                                <input type="submit" value="Register" ng-click="UserForm.$valid && UserSave()">
+                            </form>
+                        </div>
+                        <div class="cta"><a href="#">Forgot your password?</a></div>
+                    </div>
+                </div>
+                <script>
+                    $('.toggle').click(function(){
+                    // Switches the Icon
+                    $(this).children('i').toggleClass('fa-pencil');
+                    // Switches the forms  
+                    $('.form').animate({
+                    height: "toggle",
+                            'padding-top': 'toggle',
+                            'padding-bottom': 'toggle',
+                            opacity: "toggle"
+                    }, "slow");
+                    });
+                </script>
+
+            </div>
+            <!-- //login -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- //banner -->
+    <!-- //newsletter-top-serv-btm -->
+    <script src="admin/app/webApp.js"></script>
+    <header ng-include="'footer.html'"></header>
